@@ -1873,8 +1873,8 @@ body::before {
     padding: 0;
     backdrop-filter: blur(10px);
     flex: 1;
-    max-width: 250px;
-    height: 350px; /* Фиксированная высота */
+    max-width: 300px;
+    height: 400px;
 }
 
 .double-photo-frame:hover {
@@ -1884,8 +1884,8 @@ body::before {
 
 .double-photo-frame img {
     width: 100%;
-    height: 100%; /* Заполняем всю высоту контейнера */
-    object-fit: cover; /* Сохраняем пропорции и заполняем контейнер */
+    height: 100%;
+    object-fit: cover;
     display: block;
     border-radius: 16px;
     transition: all 0.3s ease;
@@ -1902,7 +1902,7 @@ body::before {
     .double-photo-frame {
         border-radius: 12px;
         max-width: none;
-        height: 280px; /* Меньшая высота для мобилок */
+        height: 320px;
     }
     
     .double-photo-frame img {
@@ -1919,7 +1919,7 @@ body::before {
     
     .double-photo-frame {
         border-radius: 10px;
-        height: 220px; /* Ещё меньшая высота для маленьких экранов */
+        height: 260px;
     }
     
     .double-photo-frame img {
