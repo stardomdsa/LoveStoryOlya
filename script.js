@@ -75,159 +75,181 @@ document.addEventListener('DOMContentLoaded', function() {
             el.classList.add('handwriting');
         });
         
-        // Музыкальный плеер
+        // Музыкальный плеер - ОБНОВЛЕННАЯ ВЕРСИЯ
         const audioElement = document.getElementById('love-song');
         const playPauseButton = document.getElementById('play-pause');
-        const progressBar = document.querySelector('.progress-bar');
+        const volumeButton = document.getElementById('volume-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const progressThumb = document.getElementById('progress-thumb');
+        const progressTrack = document.querySelector('.progress-track');
+        const currentTimeElement = document.getElementById('current-time');
+        const durationElement = document.getElementById('duration');
+        
+        let isPlaying = false;
+        let isMuted = false;
+        let savedVolume = 0.7;
+        
+        // Инициализация плеера
+        function initPlayer() {
+            audioElement.volume = savedVolume;
+            
+            // Загрузка метаданных
+            audioElement.addEventListener('loadedmetadata', function() {
+                updateDuration();
+            });
+            
+            // Обновление времени
+            audioElement.addEventListener('timeupdate', function() {
+                updateProgress();
+                updateCurrentTime();
+            });
+            
+            // Конец трека
+            audioElement.addEventListener('ended', function() {
+                resetPlayer();
+            });
+        }
+        
+        // Функция воспроизведения/паузы
+        function togglePlay() {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+        
+        function playAudio() {
+            audioElement.play().then(() => {
+                isPlaying = true;
+                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                
+                // Анимация звуковых волн
+                const waves = document.querySelectorAll('.sound-waves .wave');
+                waves.forEach(wave => {
+                    wave.style.animationPlayState = 'running';
+                });
+                
+                // Создание сердечек
+                createFloatingHearts();
+                
+            }).catch(error => {
+                console.log('Ошибка воспроизведения: ', error);
+                if (isMobile) {
+                    alert('Для воспроизведения музыки коснитесь кнопки ещё раз.');
+                }
+            });
+        }
+        
+        function pauseAudio() {
+            audioElement.pause();
+            isPlaying = false;
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            
+            // Остановка анимации волн
+            const waves = document.querySelectorAll('.sound-waves .wave');
+            waves.forEach(wave => {
+                wave.style.animationPlayState = 'paused';
+            });
+        }
+        
+        function resetPlayer() {
+            audioElement.currentTime = 0;
+            isPlaying = false;
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            updateProgress();
+            updateCurrentTime();
+        }
+        
+        // Управление громкостью
+        function toggleVolume() {
+            if (isMuted) {
+                audioElement.volume = savedVolume;
+                volumeButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+                isMuted = false;
+            } else {
+                savedVolume = audioElement.volume;
+                audioElement.volume = 0;
+                volumeButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                isMuted = true;
+            }
+        }
+        
+        // Обновление прогресса
+        function updateProgress() {
+            if (audioElement.duration) {
+                const progress = (audioElement.currentTime / audioElement.duration) * 100;
+                progressBar.style.width = progress + '%';
+                progressThumb.style.left = progress + '%';
+            }
+        }
+        
+        function updateCurrentTime() {
+            if (currentTimeElement) {
+                currentTimeElement.textContent = formatTime(audioElement.currentTime);
+            }
+        }
+        
+        function updateDuration() {
+            if (durationElement) {
+                durationElement.textContent = formatTime(audioElement.duration);
+            }
+        }
+        
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Клик по прогресс-бару
+        function handleProgressClick(e) {
+            const rect = progressTrack.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const progress = clickX / rect.width;
+            
+            if (audioElement.duration) {
+                audioElement.currentTime = progress * audioElement.duration;
+            }
+        }
+        
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            if (!heartsContainer) return;
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('i');
+                    heart.classList.add('fas', 'fa-heart', 'floating-heart');
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.bottom = '-20px';
+                    heart.style.fontSize = (15 + Math.random() * 10) + 'px';
+                    heart.style.color = `hsl(${340 + Math.random() * 20}, 85%, 65%)`;
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.parentNode.removeChild(heart);
+                    }, 8000);
+                }, i * 500);
+            }
+        }
+        
+        // Привязка событий
+        playPauseButton.addEventListener('click', togglePlay);
+        volumeButton.addEventListener('click', toggleVolume);
+        progressTrack.addEventListener('click', handleProgressClick);
+        
+        // Инициализация
+        initPlayer();
         
         // Предварительно загружаем аудио для мобильных устройств
         if (isMobile) {
-            // На мобильных устройствах аудио не загружается автоматически
             audioElement.load();
-            
-            // Добавляем событие для воспроизведения после взаимодействия с пользователем
             document.body.addEventListener('touchstart', function() {
-                if (audioElement.readyState >= 2) { // HAVE_CURRENT_DATA или выше
-                    // Удаляем обработчик после первого взаимодействия
+                if (audioElement.readyState >= 2) {
                     document.body.removeEventListener('touchstart', arguments.callee);
                 }
             }, { once: true });
-        }
-        
-        // Начинаем мягко воспроизводить при нажатии
-        playPauseButton.addEventListener(isMobile ? 'touchstart' : 'click', togglePlay);
-        
-        let isMuted = false; // Для отслеживания состояния звука
-        
-        function togglePlay() {
-            if (audioElement.paused) {
-                audioElement.volume = 0;
-                audioElement.play().then(() => {
-                    // Плавное увеличение громкости
-                    let volume = 0;
-                    const fadeIn = setInterval(() => {
-                        volume += 0.05;
-                        if (volume > 0.7) {
-                            volume = 0.7;
-                            clearInterval(fadeIn);
-                        }
-                        audioElement.volume = volume;
-                    }, 100);
-                    
-                    // Создаем "волну" сердечек при запуске музыки
-                    const viewportWidth = window.innerWidth;
-                    for (let i = 0; i < 8; i++) {
-                        setTimeout(() => {
-                            const heart = document.createElement('i');
-                            heart.classList.add('fas', 'fa-heart', 'floating-heart');
-                            heart.style.left = (viewportWidth / 2 - 150 + i * 40) + 'px';
-                            heart.style.bottom = '-20px';
-                            heart.style.fontSize = (20 + Math.random() * 10) + 'px';
-                            heart.style.animationDuration = (Math.random() * 3 + 8) + 's';
-                            heart.style.color = `hsl(${340 + Math.random() * 20}, 85%, 65%)`;
-                            document.querySelector('.floating-hearts').appendChild(heart);
-                            
-                            setTimeout(() => {
-                                if (heart.parentNode) heart.parentNode.removeChild(heart);
-                            }, 12000);
-                        }, i * 150);
-                    }
-                }).catch(error => {
-                    // Обработка ошибок воспроизведения (часто встречается на мобильных устройствах)
-                    console.log('Ошибка воспроизведения: ', error);
-                    
-                    // На мобильных устройствах мы показываем уведомление
-                    if (isMobile) {
-                        alert('Для воспроизведения музыки, пожалуйста, коснитесь экрана ещё раз.');
-                    }
-                });
-                playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-                
-                // Добавляем эффект пульсации
-                playPauseButton.classList.add('pulsating');
-                setTimeout(() => {
-                    playPauseButton.classList.remove('pulsating');
-                }, 1000);
-            } else {
-                // Плавное уменьшение громкости
-                const currentVolume = audioElement.volume;
-                const fadeOut = setInterval(() => {
-                    let volume = audioElement.volume;
-                    volume -= 0.05;
-                    
-                    if (volume <= 0) {
-                        volume = 0;
-                        clearInterval(fadeOut);
-                        audioElement.pause();
-                    }
-                    audioElement.volume = volume;
-                }, 100);
-                
-                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-            }
-        }
-        
-        // Обновление прогресс-бара
-        audioElement.addEventListener('timeupdate', updateProgress);
-        
-        function updateProgress() {
-            const duration = audioElement.duration;
-            if (duration > 0) {
-                const currentTime = audioElement.currentTime;
-                const percent = (currentTime / duration) * 100;
-                progressBar.style.width = percent + '%';
-            }
-        }
-        
-        // Зациклить музыку
-        audioElement.addEventListener('ended', function() {
-            audioElement.currentTime = 0;
-            audioElement.play();
-        });
-        
-        // Генерация плавающих сердечек
-        generateFloatingHearts();
-        // На мобильных устройствах генерируем сердечки реже для экономии ресурсов
-        setInterval(generateFloatingHearts, isMobile ? 8000 : 4000);
-        
-        function generateFloatingHearts() {
-            const heartsContainer = document.querySelector('.floating-hearts');
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            
-            // Создаем от 3 до 5 сердечек, для мобильных меньше
-            const heartCount = isMobile ? 
-                (Math.floor(Math.random() * 2) + 2) : // 2-3 для мобильных
-                (Math.floor(Math.random() * 3) + 3);  // 3-5 для десктопов
-            
-            for (let i = 0; i < heartCount; i++) {
-                const size = Math.floor(Math.random() * 20) + 15; // От 15px до 35px
-                const heart = document.createElement('i');
-                
-                heart.classList.add('fas', 'fa-heart', 'floating-heart');
-                heart.style.left = Math.random() * (viewportWidth - 20) + 'px';
-                heart.style.bottom = '-20px';
-                heart.style.fontSize = size + 'px';
-                heart.style.animationDuration = (Math.random() * 5 + 8) + 's'; // От 8 до 13 секунд
-                
-                // Добавляем небольшую задержку для каждого сердечка
-                heart.style.animationDelay = (Math.random() * 2) + 's';
-                
-                // Добавляем случайный оттенок розового/красного
-                const hue = Math.floor(Math.random() * 30) + 340; // От 340 до 370 (или 0-10) по цветовому кругу
-                const saturation = Math.floor(Math.random() * 30) + 70; // От 70% до 100%
-                const lightness = Math.floor(Math.random() * 20) + 50; // От 50% до 70%
-                heart.style.color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-                
-                heartsContainer.appendChild(heart);
-                
-                // Удаляем сердечко после окончания анимации
-                setTimeout(() => {
-                    if (heart && heart.parentNode) {
-                        heart.parentNode.removeChild(heart);
-                    }
-                }, 15000);
-            }
         }
         
         // Анимация появления элементов

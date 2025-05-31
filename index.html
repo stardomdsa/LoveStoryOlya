@@ -78,45 +78,97 @@
             <span class="card-decoration decoration-top-right"></span>
             <span class="card-decoration decoration-bottom-left"></span>
             <span class="card-decoration decoration-bottom-right"></span>
-            <h1>Моей любимой</h1>
+            <h1>Ольга,</h1>
             <div class="love-text">
-                <p>Дорогая моя,</p>
-                <p>Ты — чудо, которое наполняет мою жизнь светом и смыслом. Твоя улыбка — мой главный источник счастья.</p>
-                <p>Я благодарю судьбу за каждый миг рядом с тобой. Ты — моё вдохновение, моя радость, моя любовь.</p>
-                <p>Я люблю тебя бесконечно и навсегда <i class="fas fa-heart heart-icon"></i></p>
-                <p class="signature">Твой навеки</p>
+                <p>Ты — не просто часть прошлого.<br>
+                Ты — исключение. Та, о ком не забывают, сколько бы времени ни прошло.</p>
+                
+                <p>Ты — единственный человек в моей жизни,<br>
+                который умел любить по-настоящему.<br>
+                Без условий. Без требований. Без страха быть ранимой.<br>
+                Ты просто была. Сильно. Честно.<br>
+                Так, как никто больше не мог. И вряд ли сможет.</p>
+                
+                <p>Мы с тобой прошли многое.<br>
+                И хорошее, и сложное, и то, о чём не говорят вслух.<br>
+                Но сквозь все слова, ссоры, молчание,<br>
+                одна вещь оставалась неизменной —<br>
+                твоя любовь.</p>
+                
+                <p>И если в моей жизни и было что-то настоящее —<br>
+                это была она.</p>
+                
+                <p><strong>Ты.</strong></p>
+                
+                <p>Я не пришёл просить прощения.<br>
+                Я не жду, что ты что-то вспомнишь или что-то захочешь.<br>
+                Я просто хочу, чтобы ты знала:</p>
+                
+                <p>Ты была для меня самым светлым и честным чувством за всё время.<br>
+                И остаёшься таким до сих пор.<br>
+                Я благодарю тебя за твое терпение и за то искреннее чувство любви, которое я смог осознать.</p>
+                
+                <p>Этот трек — я написал сам.<br>
+                Не для того, чтобы удивить.<br>
+                А чтобы ты услышала то,<br>
+                что всё это время жило внутри.</p>
             </div>
         </section>
-        <section class="bunny-facts animate-slideup">
-            <span class="card-decoration decoration-top-left"></span>
-            <h2><i class="fas fa-star"></i> Милые факты о нас</h2>
-            <ul>
-                <li><i class="fas fa-heart"></i> Ты всегда поддерживаешь меня, даже когда я сомневаюсь в себе.</li>
-                <li><i class="fas fa-mug-hot"></i> Наши уютные вечера — самые тёплые воспоминания.</li>
-                <li><i class="fas fa-paw"></i> Вместе мы смеёмся над глупостями и строим свои маленькие традиции.</li>
-                <li><i class="fas fa-music"></i> У нас есть своя песня, и она всегда звучит в моём сердце.</li>
-                <li><i class="fas fa-infinity"></i> Я хочу быть с тобой всегда.</li>
-            </ul>
-        </section>
-        <section class="wish-card animate-slideup">
-            <span class="card-decoration decoration-bottom-right"></span>
-            <h2><i class="fas fa-gift"></i> Пожелание</h2>
-            <p>Пусть каждый твой день будет наполнен радостью, любовью и вдохновением. Я всегда рядом, чтобы поддержать, обнять и сделать тебя счастливой!</p>
-            <div class="ribbon">
-                <span class="ribbon-text">С любовью</span>
+        
+        <section class="music-card animate-slideup">
+            <div class="music-header">
+                <i class="fas fa-headphones music-icon"></i>
+                <h2>Песня для Ольги</h2>
+                <div class="sound-waves">
+                    <span class="wave"></span>
+                    <span class="wave"></span>
+                    <span class="wave"></span>
+                    <span class="wave"></span>
+                    <span class="wave"></span>
+                </div>
+            </div>
+            
+            <div class="music-description">
+                <p>Этот трек создан специально для тебя.</p>
+                <p>В каждой ноте — мои чувства, в каждом слове — моя искренность.</p>
+            </div>
+            
+            <div class="music-player">
+                <div class="track-info">
+                    <div class="track-title">Для Ольги</div>
+                    <div class="track-artist">Автор: твой</div>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="play-btn" id="play-pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <div class="progress-container">
+                        <div class="time-display">
+                            <span id="current-time">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-bar" id="progress-bar"></div>
+                            <div class="progress-thumb" id="progress-thumb"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="volume-btn" id="volume-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                
+                <audio id="love-song" preload="auto" src="olyabaturina.mp3"></audio>
+            </div>
+            
+            <div class="music-note">
+                <i class="fas fa-heart"></i>
+                <span>Слушай с любовью</span>
+                <i class="fas fa-heart"></i>
             </div>
         </section>
-        <button class="music-fab animate-fadein" id="play-pause">
-            <i class="fas fa-play"></i>
-            <span class="music-wave">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </span>
-        </button>
-        <audio id="love-song" preload="auto" src="olyabaturina.mp3"></audio>
-        <div class="music-progress"><div class="progress-bar"></div></div>
     </main>
     <script src="script.js"></script>
 </body>
