@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моё признание в любви</title>
+    <meta name="description" content="Самое искреннее и нежное признание в любви для моей единственной">
+    <meta name="theme-color" content="#ffb6c1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4d6d'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Прелоадер (анимация загрузки) -->
+    <div class="preloader" id="preloader">
+        <div class="loader-heart">
+            <div class="loader-heart-piece"></div>
+            <div class="loader-heart-piece"></div>
+            <div class="heart-loader-text">Загрузка<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+        </div>
+    </div>
+
+    <div class="bg-gradient"></div>
+    <div class="bokeh-bg">
+        <div class="bokeh b1"></div>
+        <div class="bokeh b2"></div>
+        <div class="bokeh b3"></div>
+        <div class="bokeh b4"></div>
+    </div>
+    <div class="flowers">
+        <div class="flower flower-1">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+        <div class="flower flower-2">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+        <div class="flower flower-3">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+    </div>
+    <div class="floating-hearts"></div>
+    <main class="main-wrapper">
+        <div class="bunny-main animate-fadein">
+            <div class="bunny-glow"></div>
+            <div class="bunny-ears">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+            </div>
+            <div class="bunny-head bunny-breath" id="bunny-head">
+                <div class="bunny-photo" id="bunny-photo">
+                    <img src="ol.jpg" alt="Наша фотография">
+                    <div class="photo-overlay"></div>
+                </div>
+                <div class="bunny-face">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="nose"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+        </div>
+        <section class="love-card animate-slideup">
+            <span class="card-decoration decoration-top-left"></span>
+            <span class="card-decoration decoration-top-right"></span>
+            <span class="card-decoration decoration-bottom-left"></span>
+            <span class="card-decoration decoration-bottom-right"></span>
+            <h1>Моей любимой</h1>
+            <div class="love-text">
+                <p>Дорогая моя,</p>
+                <p>Ты — чудо, которое наполняет мою жизнь светом и смыслом. Твоя улыбка — мой главный источник счастья.</p>
+                <p>Я благодарю судьбу за каждый миг рядом с тобой. Ты — моё вдохновение, моя радость, моя любовь.</p>
+                <p>Я люблю тебя бесконечно и навсегда <i class="fas fa-heart heart-icon"></i></p>
+                <p class="signature">Твой навеки</p>
+            </div>
+        </section>
+        <section class="bunny-facts animate-slideup">
+            <span class="card-decoration decoration-top-left"></span>
+            <h2><i class="fas fa-star"></i> Милые факты о нас</h2>
+            <ul>
+                <li><i class="fas fa-heart"></i> Ты всегда поддерживаешь меня, даже когда я сомневаюсь в себе.</li>
+                <li><i class="fas fa-mug-hot"></i> Наши уютные вечера — самые тёплые воспоминания.</li>
+                <li><i class="fas fa-paw"></i> Вместе мы смеёмся над глупостями и строим свои маленькие традиции.</li>
+                <li><i class="fas fa-music"></i> У нас есть своя песня, и она всегда звучит в моём сердце.</li>
+                <li><i class="fas fa-infinity"></i> Я хочу быть с тобой всегда.</li>
+            </ul>
+        </section>
+        <section class="wish-card animate-slideup">
+            <span class="card-decoration decoration-bottom-right"></span>
+            <h2><i class="fas fa-gift"></i> Пожелание</h2>
+            <p>Пусть каждый твой день будет наполнен радостью, любовью и вдохновением. Я всегда рядом, чтобы поддержать, обнять и сделать тебя счастливой!</p>
+            <div class="ribbon">
+                <span class="ribbon-text">С любовью</span>
+            </div>
+        </section>
+        <button class="music-fab animate-fadein" id="play-pause">
+            <i class="fas fa-play"></i>
+            <span class="music-wave">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </span>
+        </button>
+        <audio id="love-song" preload="auto" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+        <div class="music-progress"><div class="progress-bar"></div></div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html> 
