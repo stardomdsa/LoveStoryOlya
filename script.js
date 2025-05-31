@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Музыкальный плеер - ОБНОВЛЕННАЯ ВЕРСИЯ
         const audioElement = document.getElementById('love-song');
         const playPauseButton = document.getElementById('play-pause');
-        const volumeButton = document.getElementById('volume-btn');
         const progressBar = document.getElementById('progress-bar');
         const progressThumb = document.getElementById('progress-thumb');
         const progressTrack = document.querySelector('.progress-track');
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const durationElement = document.getElementById('duration');
         
         let isPlaying = false;
-        let isMuted = false;
         let savedVolume = 0.7;
         
         // Инициализация плеера
@@ -159,20 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
             playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
             updateProgress();
             updateCurrentTime();
-        }
-        
-        // Управление громкостью
-        function toggleVolume() {
-            if (isMuted) {
-                audioElement.volume = savedVolume;
-                volumeButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                isMuted = false;
-            } else {
-                savedVolume = audioElement.volume;
-                audioElement.volume = 0;
-                volumeButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                isMuted = true;
-            }
         }
         
         // Обновление прогресса
@@ -255,21 +239,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Привязка событий
         playPauseButton.addEventListener('click', togglePlay);
-        volumeButton.addEventListener('click', toggleVolume);
         progressTrack.addEventListener('click', handleProgressClick);
         
         // Инициализация
         initPlayer();
-        
-        // Предварительно загружаем аудио для мобильных устройств
-        if (isMobile) {
-            audioElement.load();
-            document.body.addEventListener('touchstart', function() {
-                if (audioElement.readyState >= 2) {
-                    document.body.removeEventListener('touchstart', arguments.callee);
-                }
-            }, { once: true });
-        }
         
         // Анимация появления элементов
         function animateElements() {

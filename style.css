@@ -450,38 +450,37 @@ body::before {
 
 /* Карточки */
 .love-card, .bunny-facts, .wish-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 24px;
+    max-width: 520px;
+    margin: 30px auto;
+    padding: 32px;
+    background: var(--card-bg-alt);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
     box-shadow: var(--shadow);
-    max-width: 400px;
-    width: 90vw;
-    margin: 0 auto 24px auto;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
+    transform: none !important;
+    transition: none;
 }
 
 .love-card::after, .bunny-facts::after, .wish-card::after {
     content: '';
     position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    border-radius: inherit;
     opacity: 0;
-    transition: opacity 0.3s;
     pointer-events: none;
-    transform: scale(1.8);
+    transition: none;
 }
 
 .love-card:hover::after, .bunny-facts:hover::after, .wish-card:hover::after {
-    opacity: 1;
+    opacity: 0;
 }
 
 .love-card:hover, .bunny-facts:hover, .wish-card:hover {
-    transform: translateY(-8px) rotate(-0.5deg);
-    box-shadow: var(--shadow), 0 15px 35px rgba(255, 77, 109, 0.12);
+    transform: none !important;
+    box-shadow: var(--shadow);
 }
 
 .love-card {
@@ -510,7 +509,10 @@ body::before {
 }
 
 .love-card:hover h1 {
-    transform: scale(1.05);
+    /* Убираем эффект движения */
+    transform: none;
+    color: var(--accent);
+    text-shadow: var(--glow);
 }
 
 .love-text {
@@ -527,7 +529,9 @@ body::before {
 }
 
 .love-card:hover .love-text p {
-    opacity: 1;
+    /* Убираем эффект движения */
+    transform: none;
+    color: #2a1f24;
 }
 
 .love-text p:first-child {
@@ -548,7 +552,11 @@ body::before {
 }
 
 .love-text .signature:hover {
-    transform: scale(1.1) rotate(-2deg);
+    /* Убираем эффект движения */
+    transform: none;
+    color: var(--accent);
+    text-shadow: 2px 2px 8px rgba(255, 77, 109, 0.4);
+    filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.6));
 }
 
 .heart-icon {
@@ -580,7 +588,9 @@ body::before {
 }
 
 .bunny-facts:hover h2, .wish-card:hover h2 {
-    transform: translateX(5px);
+    /* Убираем эффект движения */
+    transform: none;
+    color: var(--accent);
 }
 
 .bunny-facts h2 i, .wish-card h2 i {
@@ -605,8 +615,11 @@ body::before {
     padding-left: 5px;
 }
 .bunny-facts li:hover {
-    transform: translateX(5px);
-    color: var(--accent);
+    /* Убираем эффект движения */
+    transform: none;
+    background: rgba(255, 182, 193, 0.1);
+    border-radius: 8px;
+    padding-left: 20px;
 }
 
 .bunny-facts li::before {
@@ -622,20 +635,10 @@ body::before {
     opacity: 0.5;
 }
 
-.bunny-facts li:hover::before {
-    width: 5px;
-}
-
-.bunny-facts li i {
-    color: var(--accent);
-    min-width: 24px;
-    text-align: center;
-    font-size: 1.1rem;
-    transition: transform 0.3s;
-}
-
 .bunny-facts li:hover i {
-    transform: scale(1.3);
+    /* Убираем эффект движения */
+    transform: scale(1.3) rotate(5deg);
+    color: var(--accent);
 }
 
 .wish-card p {
@@ -669,6 +672,9 @@ body::before {
     border: 2px solid rgba(255, 255, 255, 0.4);
     position: relative;
     overflow: hidden;
+    /* Убираем все движения */
+    transform: none !important;
+    transition: none !important;
 }
 
 .music-card::before {
@@ -698,12 +704,8 @@ body::before {
     font-size: 2.5rem;
     color: var(--accent);
     margin-bottom: 10px;
-    animation: musicIconPulse 2s infinite ease-in-out;
-}
-
-@keyframes musicIconPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    /* Убираем анимацию пульсации */
+    animation: none;
 }
 
 .music-header h2 {
@@ -726,6 +728,7 @@ body::before {
     height: 20px;
     background: linear-gradient(45deg, var(--accent), #ff97c9);
     border-radius: 2px;
+    /* Возвращаем анимацию волн */
     animation: waveAnimation 1.5s infinite ease-in-out;
 }
 
@@ -781,38 +784,16 @@ body::before {
 
 .player-controls {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
 }
 
-.play-btn, .volume-btn {
-    width: 60px;
-    height: 60px;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(145deg, var(--accent), #ff4d6d);
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-btn:hover, .volume-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255, 77, 109, 0.6);
-}
-
-.play-btn:active, .volume-btn:active {
-    transform: translateY(0);
-}
-
 .progress-container {
-    flex: 1;
-    margin: 0 15px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0;
+    order: 1;
 }
 
 .time-display {
@@ -852,6 +833,35 @@ body::before {
     cursor: pointer;
 }
 
+.play-btn {
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--accent), #ff4d6d);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+    /* Убираем все движения */
+    transform: none !important;
+}
+
+.play-btn:hover {
+    /* Убираем движение кнопок */
+    transform: none !important;
+    box-shadow: 0 12px 35px rgba(255, 77, 109, 0.6);
+}
+
+.play-btn:active {
+    transform: none !important;
+}
+
 .music-note {
     text-align: center;
     margin-top: 25px;
@@ -870,240 +880,8 @@ body::before {
 
 .music-note i {
     color: var(--accent);
-    animation: heartBeat 1.5s infinite;
-}
-
-@keyframes heartBeat {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.1); }
-    75% { transform: scale(0.9); }
-}
-
-/* Мобильная адаптация */
-@media (max-width: 600px) {
-    .music-card {
-        margin: 20px 15px;
-        padding: 20px;
-    }
-    
-    .music-header h2 {
-        font-size: 1.6rem;
-    }
-    
-    .music-icon {
-        font-size: 2rem;
-    }
-    
-    .music-player {
-        padding: 20px 15px;
-    }
-    
-    .player-controls {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .play-btn, .volume-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-    
-    .progress-container {
-        width: 100%;
-        margin: 0;
-    }
-    
-    .music-description p {
-        font-size: 1rem;
-    }
-}
-
-/* Специальная адаптация для iPhone */
-@media (max-width: 480px) {
-    .music-card {
-        margin: 15px 10px;
-        padding: 25px 20px;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5);
-    }
-    
-    .music-header {
-        margin-bottom: 20px;
-    }
-    
-    .music-header h2 {
-        font-size: 1.5rem;
-        margin: 8px 0;
-    }
-    
-    .music-icon {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-    }
-    
-    .sound-waves {
-        gap: 3px;
-        margin-top: 12px;
-    }
-    
-    .wave {
-        width: 3px;
-        height: 15px;
-    }
-    
-    .music-description {
-        margin-bottom: 25px;
-    }
-    
-    .music-description p {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin: 6px 0;
-    }
-    
-    .music-player {
-        padding: 25px 20px;
-        border-radius: 18px;
-        margin: 15px 0;
-    }
-    
-    .track-info {
-        margin-bottom: 25px;
-    }
-    
-    .track-title {
-        font-size: 1.2rem;
-        margin-bottom: 4px;
-    }
-    
-    .track-artist {
-        font-size: 0.9rem;
-    }
-    
-    .player-controls {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .play-btn {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
-        margin-bottom: 5px;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-    
-    .volume-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.3rem;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-    
-    .progress-container {
-        width: 100%;
-        max-width: 280px;
-        margin: 0;
-        order: -1;
-    }
-    
-    .time-display {
-        font-size: 0.85rem;
-        margin-bottom: 10px;
-        font-weight: 500;
-    }
-    
-    .progress-track {
-        height: 10px;
-        border-radius: 5px;
-        background: rgba(255, 182, 193, 0.4);
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .progress-bar {
-        height: 100%;
-        border-radius: 5px;
-        background: linear-gradient(90deg, var(--accent), #ff97c9);
-    }
-    
-    .progress-thumb {
-        width: 20px;
-        height: 20px;
-        right: -10px;
-        box-shadow: 0 3px 12px rgba(255, 77, 109, 0.5);
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .music-note {
-        margin-top: 20px;
-        padding: 12px;
-        border-radius: 12px;
-    }
-    
-    .music-note span {
-        margin: 0 8px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .music-card {
-        margin: 15px 10px;
-        padding: 15px;
-    }
-    
-    .music-header h2 {
-        font-size: 1.4rem;
-    }
-    
-    .sound-waves {
-        gap: 3px;
-    }
-    
-    .wave {
-        width: 3px;
-        height: 15px;
-    }
-}
-
-/* Улучшения для устройств с высоким DPI (Retina) */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .music-card {
-        border-width: 1px;
-    }
-    
-    .progress-track, .progress-bar {
-        border-radius: 6px;
-    }
-    
-    .play-btn, .volume-btn {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-}
-
-/* Дополнительные стили для улучшения взаимодействия на iOS */
-@supports (-webkit-touch-callout: none) {
-    .play-btn, .volume-btn, .progress-track, .progress-thumb {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    
-    .play-btn:active, .volume-btn:active {
-        transform: scale(0.95);
-        transition: transform 0.1s ease;
-    }
-    
-    .progress-track:active .progress-thumb {
-        transform: translateY(-50%) scale(1.2);
-        transition: transform 0.1s ease;
-    }
+    /* Убираем анимацию сердечек */
+    animation: none;
 }
 
 /* Музыка и плавающие сердечки */
@@ -1252,20 +1030,26 @@ body::before {
     .nose { width: 20px; height: 12px; top: 130px; }
     .mouth { width: 26px; height: 6px; top: 150px; }
     
-    /* Улучшенное оформление для мобильных */
+    /* Фиксированные отступы для главного контейнера */
     .main-wrapper {
-        padding: 20px 15px 80px 15px;
+        padding: 20px 20px 80px 20px; /* Постоянные отступы */
     }
     
+    /* Фиксированные отступы для текстового блока */
     .love-card { 
-        padding: 30px 20px 25px 20px; 
-        margin: 20px 15px;
+        margin: 25px 20px !important; /* Фиксированные внешние отступы */
+        padding: 30px 25px !important; /* Фиксированные внутренние отступы */
+        width: calc(100% - 40px); /* Ширина с учетом отступов */
+        max-width: none;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         box-shadow: 0 10px 40px rgba(255, 182, 193, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.3);
         line-height: 1.7;
+        /* Отключаем любые трансформации */
+        transform: none !important;
+        transition: none !important;
     }
     
     .love-card h1 { 
@@ -1281,11 +1065,12 @@ body::before {
         line-height: 1.8;
         color: #444;
         text-align: left;
+        padding: 0; /* Убираем дополнительные отступы */
     }
     
     .love-text p {
         margin-bottom: 20px;
-        padding: 0 5px;
+        padding: 0; /* Убираем внутренние отступы параграфов */
         text-align: left;
         color: #333;
         font-weight: 400;
@@ -1308,20 +1093,17 @@ body::before {
         color: var(--accent);
     }
     
-    .love-text .signature { 
-        font-size: 1.4rem; 
-        text-align: center;
-        margin-top: 25px;
-        font-family: var(--handwriting);
-        color: var(--accent);
-    }
-    
     .bunny-facts, .wish-card {
-        padding: 25px 20px;
-        margin: 20px 15px;
+        margin: 25px 20px !important;
+        padding: 25px 20px !important;
+        width: calc(100% - 40px);
+        max-width: none;
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
+        /* Отключаем трансформации */
+        transform: none !important;
+        transition: none !important;
     }
     
     .bunny-facts h2, .wish-card h2 {
@@ -1355,11 +1137,22 @@ body::before {
     }
 }
 
-/* Дополнительные стили для очень маленьких экранов */
+/* Для очень маленьких экранов */
 @media (max-width: 400px) {
+    .main-wrapper {
+        padding: 15px 15px 80px 15px; /* Уменьшенные отступы для маленьких экранов */
+    }
+    
     .love-card {
-        margin: 15px 10px;
-        padding: 25px 15px 20px 15px;
+        margin: 20px 15px !important; /* Меньшие отступы */
+        padding: 25px 20px !important;
+        width: calc(100% - 30px); /* Ширина с учетом новых отступов */
+    }
+    
+    .bunny-facts, .wish-card {
+        margin: 20px 15px !important;
+        padding: 20px 15px !important;
+        width: calc(100% - 30px);
     }
     
     .love-text {
@@ -1368,10 +1161,6 @@ body::before {
     
     .love-card h1 {
         font-size: 2rem;
-    }
-    
-    .love-text p {
-        padding: 0 2px;
     }
 }
 
@@ -1730,23 +1519,223 @@ body::before {
     margin: 0;
 }
 
-/* Обновленные стили для мобильной версии */
+/* Мобильная адаптация для музыкального блока */
 @media (max-width: 600px) {
-    .music-controls {
-        margin: 20px 0;
-        padding: 15px;
-        gap: 12px;
+    .music-card {
+        margin: 25px 20px !important;
+        padding: 25px 20px !important;
+        width: calc(100% - 40px);
+        max-width: none;
+        /* Убираем все движения */
+        transform: none !important;
+        transition: none !important;
     }
     
-    .music-controls .music-fab {
-        width: 50px;
-        height: 50px;
+    .music-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .music-icon {
+        font-size: 2rem;
+    }
+    
+    .music-player {
+        padding: 20px 15px;
+    }
+    
+    .player-controls {
+        gap: 15px;
+    }
+    
+    .progress-container {
+        max-width: 300px;
+    }
+    
+    .play-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+        transform: none !important;
+    }
+    
+    .music-description p {
+        font-size: 1rem;
+    }
+}
+
+/* Специальная адаптация для iPhone */
+@media (max-width: 480px) {
+    .music-card {
+        margin: 20px 15px !important;
+        padding: 20px 15px !important;
+        width: calc(100% - 30px);
+        transform: none !important;
+        transition: none !important;
+    }
+    
+    .music-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .music-icon {
+        font-size: 1.8rem;
+    }
+    
+    .music-player {
+        padding: 20px 15px;
+    }
+    
+    .player-controls {
+        gap: 18px;
+    }
+    
+    .progress-container {
+        max-width: 280px;
+    }
+    
+    .progress-track {
+        height: 10px;
+        border-radius: 5px;
+    }
+    
+    .progress-bar {
+        border-radius: 5px;
+    }
+    
+    .progress-thumb {
+        width: 18px;
+        height: 18px;
+        right: -9px;
+    }
+    
+    .play-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        transform: none !important;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .time-display {
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    
+    .music-description p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 400px) {
+    .music-card {
+        margin: 15px 10px !important;
+        padding: 18px 12px !important;
+        width: calc(100% - 20px);
+    }
+    
+    .music-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .progress-container {
+        max-width: 250px;
+    }
+    
+    .play-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+    }
+}
+
+/* Улучшения для десктопа */
+@media (min-width: 768px) {
+    .music-card {
+        max-width: 600px;
+        padding: 40px;
+        margin: 40px auto;
+    }
+    
+    .music-header h2 {
+        font-size: 2.2rem;
+        margin: 15px 0;
+    }
+    
+    .music-icon {
+        font-size: 2.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .sound-waves {
+        gap: 5px;
+        margin-top: 20px;
+    }
+    
+    .wave {
+        width: 5px;
+        height: 25px;
+    }
+    
+    .music-description p {
         font-size: 1.2rem;
+        line-height: 1.7;
+        margin: 10px 0;
     }
     
-    .music-controls .music-progress {
-        width: 100%;
-        max-width: 200px;
-        height: 6px;
+    .music-player {
+        padding: 35px;
+        margin: 30px 0;
+    }
+    
+    .track-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+    
+    .track-artist {
+        font-size: 1.1rem;
+    }
+    
+    .progress-container {
+        max-width: 450px;
+    }
+    
+    .progress-track {
+        height: 10px;
+        border-radius: 5px;
+    }
+    
+    .progress-bar {
+        border-radius: 5px;
+    }
+    
+    .progress-thumb {
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        box-shadow: 0 3px 12px rgba(255, 77, 109, 0.4);
+    }
+    
+    .play-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .time-display {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    .music-note {
+        margin-top: 30px;
+        padding: 20px;
+    }
+    
+    .music-note span {
+        font-size: 1.1rem;
+        margin: 0 12px;
     }
 } 
