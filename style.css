@@ -1855,12 +1855,14 @@ body::before {
     margin: 15px auto;
     padding: 0;
     display: flex;
+    flex-direction: row;
     gap: 15px;
     justify-content: center;
-    align-items: center;
+    align-items: stretch; /* Растягиваем фреймы по высоте */
     position: relative;
     transform: none !important;
     transition: none !important;
+    width: 100%;
 }
 
 .double-photo-frame {
@@ -1872,20 +1874,14 @@ body::before {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 246, 249, 0.9));
     padding: 0;
     backdrop-filter: blur(10px);
-    flex: 1;
-    max-width: 300px;
-    height: 400px;
-}
-
-.double-photo-frame:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(255, 182, 193, 0.5);
+    width: 50%;
+    /* height убираем */
 }
 
 .double-photo-frame img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     display: block;
     border-radius: 16px;
     transition: all 0.3s ease;
@@ -1894,15 +1890,14 @@ body::before {
 /* Мобильная адаптация для двойной фотосекции */
 @media (max-width: 600px) {
     .double-photo-section {
-        max-width: 370px;
         margin: 10px auto;
         gap: 10px;
+        width: 100%;
     }
     
     .double-photo-frame {
         border-radius: 12px;
-        max-width: none;
-        height: 320px;
+        width: 50%;
     }
     
     .double-photo-frame img {
@@ -1912,14 +1907,14 @@ body::before {
 
 @media (max-width: 480px) {
     .double-photo-section {
-        max-width: 280px;
         margin: 8px auto;
         gap: 8px;
+        width: 100%;
     }
     
     .double-photo-frame {
         border-radius: 10px;
-        height: 260px;
+        width: 50%;
     }
     
     .double-photo-frame img {
