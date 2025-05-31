@@ -487,14 +487,18 @@ body::before {
     padding: 32px 24px 24px 24px;
     text-align: center;
     z-index: 3;
+    overflow: hidden;
 }
 
 .love-card:before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 5px;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 5px;
     background: linear-gradient(90deg, var(--bunny-ear), var(--accent));
+    z-index: -1;
 }
 
 .love-card h1 {
@@ -719,17 +723,20 @@ body::before {
 .sound-waves {
     display: flex;
     justify-content: center;
-    gap: 4px;
-    margin-top: 15px;
+    gap: 5px;
+    margin-top: 20px;
+    height: 30px; /* Фиксированная высота для десктопа */
+    align-items: end; /* Волны будут выравниваться по низу */
 }
 
 .wave {
-    width: 4px;
-    height: 20px;
+    width: 5px;
+    height: 25px;
     background: linear-gradient(45deg, var(--accent), #ff97c9);
     border-radius: 2px;
     /* Возвращаем анимацию волн */
     animation: waveAnimation 1.5s infinite ease-in-out;
+    transform-origin: bottom; /* Анимация от низа */
 }
 
 .wave:nth-child(1) { animation-delay: 0s; }
@@ -739,8 +746,14 @@ body::before {
 .wave:nth-child(5) { animation-delay: 0.8s; }
 
 @keyframes waveAnimation {
-    0%, 100% { height: 10px; opacity: 0.5; }
-    50% { height: 25px; opacity: 1; }
+    0%, 100% { 
+        height: 10px; 
+        opacity: 0.5; 
+    }
+    50% { 
+        height: 25px; 
+        opacity: 1; 
+    }
 }
 
 .music-description {
