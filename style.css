@@ -167,7 +167,7 @@ body::before {
 
 /* Эффект рукописного текста */
 .handwriting {
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif;
     position: relative;
     display: inline-block;
 }
@@ -502,7 +502,7 @@ body::before {
 }
 
 .love-card h1 {
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif !important;
     color: var(--accent);
     font-size: 3rem;
     margin-bottom: 20px;
@@ -539,13 +539,13 @@ body::before {
 }
 
 .love-text p:first-child {
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
     color: var(--accent);
     margin-bottom: 18px;
 }
 .love-text .signature {
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif !important;
     color: var(--accent);
     font-size: 1.8rem;
     margin-top: 24px;
@@ -581,7 +581,7 @@ body::before {
     z-index: 3;
 }
 .bunny-facts h2, .wish-card h2 {
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif !important;
     color: var(--accent);
     font-size: 1.8rem;
     margin-bottom: 18px;
@@ -1559,7 +1559,7 @@ body::before {
 
 .ribbon-text {
     color: white;
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
     letter-spacing: 1px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -1702,7 +1702,7 @@ body::before {
 .heart-loader-text {
     position: absolute;
     bottom: -30px;
-    font-family: var(--handwriting);
+    font-family: 'Montserrat', sans-serif;
     color: var(--accent);
     font-size: 1.5rem;
     letter-spacing: 1px;
