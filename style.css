@@ -919,6 +919,139 @@ body::before {
     }
 }
 
+/* Специальная адаптация для iPhone */
+@media (max-width: 480px) {
+    .music-card {
+        margin: 15px 10px;
+        padding: 25px 20px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(255, 182, 193, 0.5);
+    }
+    
+    .music-header {
+        margin-bottom: 20px;
+    }
+    
+    .music-header h2 {
+        font-size: 1.5rem;
+        margin: 8px 0;
+    }
+    
+    .music-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+    
+    .sound-waves {
+        gap: 3px;
+        margin-top: 12px;
+    }
+    
+    .wave {
+        width: 3px;
+        height: 15px;
+    }
+    
+    .music-description {
+        margin-bottom: 25px;
+    }
+    
+    .music-description p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 6px 0;
+    }
+    
+    .music-player {
+        padding: 25px 20px;
+        border-radius: 18px;
+        margin: 15px 0;
+    }
+    
+    .track-info {
+        margin-bottom: 25px;
+    }
+    
+    .track-title {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+    }
+    
+    .track-artist {
+        font-size: 0.9rem;
+    }
+    
+    .player-controls {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .play-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .volume-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .progress-container {
+        width: 100%;
+        max-width: 280px;
+        margin: 0;
+        order: -1;
+    }
+    
+    .time-display {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    
+    .progress-track {
+        height: 10px;
+        border-radius: 5px;
+        background: rgba(255, 182, 193, 0.4);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        border-radius: 5px;
+        background: linear-gradient(90deg, var(--accent), #ff97c9);
+    }
+    
+    .progress-thumb {
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        box-shadow: 0 3px 12px rgba(255, 77, 109, 0.5);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .music-note {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .music-note span {
+        margin: 0 8px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 400px) {
     .music-card {
         margin: 15px 10px;
@@ -936,6 +1069,40 @@ body::before {
     .wave {
         width: 3px;
         height: 15px;
+    }
+}
+
+/* Улучшения для устройств с высоким DPI (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .music-card {
+        border-width: 1px;
+    }
+    
+    .progress-track, .progress-bar {
+        border-radius: 6px;
+    }
+    
+    .play-btn, .volume-btn {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Дополнительные стили для улучшения взаимодействия на iOS */
+@supports (-webkit-touch-callout: none) {
+    .play-btn, .volume-btn, .progress-track, .progress-thumb {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .play-btn:active, .volume-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    .progress-track:active .progress-thumb {
+        transform: translateY(-50%) scale(1.2);
+        transition: transform 0.1s ease;
     }
 }
 
